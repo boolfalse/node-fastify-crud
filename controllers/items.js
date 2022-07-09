@@ -31,5 +31,14 @@ module.exports = {
         reply.send({
             message: 'Item deleted',
         });
-    }
+    },
+    updateItem: async (request, reply) => {
+        const {id} = request.params;
+        const {name} = request.body;
+        const item = items.find(item => item.id === parseInt(id));
+
+        item.name = name;
+
+        reply.send(item);
+    },
 }

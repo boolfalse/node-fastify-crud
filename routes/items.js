@@ -4,6 +4,7 @@ const {
     getItem,
     createItem,
     deleteItem,
+    updateItem,
 } = require('./../controllers/items.js');
 const itemSchema = {
     type: 'object',
@@ -69,11 +70,29 @@ const deleteItemOptions = {
     handler: deleteItem,
 }
 
+const updateItemOptions = {
+    schema: {
+        response: {
+            200: itemSchema
+        },
+        body: {
+            type: 'object',
+            // additionalProperties: false, // it will remove all the fields that isn't in the JSON schema
+            required: ['name'],
+            properties: {
+                name: { type: 'string' }
+            }
+        },
+    },
+    handler: updateItem,
+}
+
 function itemRoutes(fastify, options, done) {
     fastify.get('/items', getItemsOptions);
     fastify.get('/items/:id', getItemOptions);
     fastify.post('/items', createItemOptions);
     fastify.delete('/items/:id', deleteItemOptions);
+    fastify.put('/items/:id', updateItemOptions);
 
     done();
 }

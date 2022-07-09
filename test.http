@@ -19,3 +19,12 @@ Content-Type: application/json
 ### DELETE ITEM
 DELETE /api/items/4 HTTP/1.1
 Host: localhost:3000
+
+### UPDATE ITEM
+PUT /api/items/4 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "name": "Updated Item"
+}
