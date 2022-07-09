@@ -1,5 +1,8 @@
 
-const items = require('./../items.js');
+const {
+    getItems,
+    getItem,
+} = require('./../controllers/items.js');
 const itemSchema = {
     type: 'object',
     properties: {
@@ -18,9 +21,7 @@ const getItemsOptions = {
             }
         }
     },
-    handler: async (request, reply) => {
-        reply.send(items);
-    }
+    handler: getItems,
 }
 
 // reply option for getting a single item
@@ -30,12 +31,7 @@ const getItemOptions = {
             200: itemSchema
         }
     },
-    handler: async (request, reply) => {
-        const {id} = request.params;
-        const item = items.find(item => item.id === parseInt(id));
-
-        reply.send(item);
-    }
+    handler: getItem,
 }
 
 function itemRoutes(fastify, options, done) {
