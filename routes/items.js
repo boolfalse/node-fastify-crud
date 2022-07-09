@@ -1,5 +1,12 @@
 
 const items = require('./../items.js');
+const itemSchema = {
+    type: 'object',
+    properties: {
+        id: { type: 'number' },
+        name: { type: 'string' }
+    }
+};
 
 // reply options for getting all the items
 const getItemsOptions = {
@@ -7,13 +14,7 @@ const getItemsOptions = {
         response: {
             200: {
                 type: 'array',
-                items: {
-                    type: 'object',
-                    properties: {
-                        id: { type: 'number' },
-                        name: { type: 'string' }
-                    }
-                }
+                items: itemSchema
             }
         }
     }
@@ -23,13 +24,7 @@ const getItemsOptions = {
 const getItemOptions = {
     schema: {
         response: {
-            200: {
-                type: 'object',
-                properties: {
-                    id: { type: 'number' },
-                    name: { type: 'string' }
-                }
-            }
+            200: itemSchema
         }
     }
 }
