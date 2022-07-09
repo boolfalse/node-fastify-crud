@@ -1,5 +1,16 @@
 
 const fastify = require('fastify')({ logger: true });
+fastify.register(require('@fastify/swagger'), {
+    exposeRoute: true,
+    routePrefix: '/docs',
+    swagger: {
+        info: {
+            title: 'Fastify API',
+            description: 'Fastify API',
+            version: '1.0.0'
+        }
+    }
+});
 
 fastify.register(require('./routes/items.js'), { prefix: '/api' });
 
