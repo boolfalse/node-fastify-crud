@@ -1,20 +1,9 @@
 
 const fastify = require('fastify')({ logger: true });
+
+fastify.register(require('./routes/items.js'), { prefix: '/api' });
+
 const PORT = 3000;
-
-const items = require('./items.js');
-
-fastify.get('/api/items', async (request, reply) => {
-    reply.send(items);
-});
-
-fastify.get('/api/items/:id', async (request, reply) => {
-    const {id} = request.params;
-    const item = items.find(item => item.id === parseInt(id));
-
-    reply.send(item);
-});
-
 const start = async () => {
     try {
         await fastify.listen({
