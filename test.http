@@ -6,3 +6,13 @@ Host: localhost:3000
 ### GET SINGLE ITEM
 GET /api/items/3 HTTP/1.1
 Host: localhost:3000
+
+### CREATE ITEM
+POST /api/items HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "name": "New Item"
+}
+

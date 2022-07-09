@@ -2,11 +2,12 @@
 const {
     getItems,
     getItem,
+    createItem,
 } = require('./../controllers/items.js');
 const itemSchema = {
     type: 'object',
     properties: {
-        id: { type: 'number' },
+        id: { type: 'string' },
         name: { type: 'string' }
     }
 };
@@ -34,9 +35,20 @@ const getItemOptions = {
     handler: getItem,
 }
 
+// reply options for creating a new item
+const createItemOptions = {
+    schema: {
+        response: {
+            201: itemSchema
+        }
+    },
+    handler: createItem,
+}
+
 function itemRoutes(fastify, options, done) {
     fastify.get('/items', getItemsOptions);
     fastify.get('/items/:id', getItemOptions);
+    fastify.post('/items', createItemOptions);
 
     done();
 }
