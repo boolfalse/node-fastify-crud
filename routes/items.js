@@ -40,7 +40,15 @@ const createItemOptions = {
     schema: {
         response: {
             201: itemSchema
-        }
+        },
+        body: {
+            type: 'object',
+            // additionalProperties: false, // it will remove all the fields that isn't in the JSON schema
+            required: ['name'],
+            properties: {
+                name: { type: 'string' }
+            }
+        },
     },
     handler: createItem,
 }
