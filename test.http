@@ -16,3 +16,6 @@ Content-Type: application/json
   "name": "New Item"
 }
 
+### DELETE ITEM
+DELETE /api/items/4 HTTP/1.1
+Host: localhost:3000

@@ -3,6 +3,7 @@ const {
     getItems,
     getItem,
     createItem,
+    deleteItem,
 } = require('./../controllers/items.js');
 const itemSchema = {
     type: 'object',
@@ -53,10 +54,26 @@ const createItemOptions = {
     handler: createItem,
 }
 
+// reply options for deleting an item
+const deleteItemOptions = {
+    schema: {
+        response: {
+            200: {
+                type: 'object',
+                properties: {
+                    message: { type: 'string' }
+                }
+            }
+        }
+    },
+    handler: deleteItem,
+}
+
 function itemRoutes(fastify, options, done) {
     fastify.get('/items', getItemsOptions);
     fastify.get('/items/:id', getItemOptions);
     fastify.post('/items', createItemOptions);
+    fastify.delete('/items/:id', deleteItemOptions);
 
     done();
 }

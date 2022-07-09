@@ -21,5 +21,15 @@ module.exports = {
         items.push(item);
 
         reply.code(201).send(item);
+    },
+    deleteItem: async (request, reply) => {
+        const {id} = request.params;
+        const item = items.find(item => item.id === parseInt(id));
+
+        items.splice(items.indexOf(item), 1);
+
+        reply.send({
+            message: 'Item deleted',
+        });
     }
 }
