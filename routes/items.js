@@ -17,6 +17,9 @@ const getItemsOptions = {
                 items: itemSchema
             }
         }
+    },
+    handler: async (request, reply) => {
+        reply.send(items);
     }
 }
 
@@ -26,20 +29,18 @@ const getItemOptions = {
         response: {
             200: itemSchema
         }
-    }
-}
-
-function itemRoutes(fastify, options, done) {
-    fastify.get('/items', getItemsOptions, async (request, reply) => {
-        reply.send(items);
-    });
-
-    fastify.get('/items/:id', getItemOptions, async (request, reply) => {
+    },
+    handler: async (request, reply) => {
         const {id} = request.params;
         const item = items.find(item => item.id === parseInt(id));
 
         reply.send(item);
-    });
+    }
+}
+
+function itemRoutes(fastify, options, done) {
+    fastify.get('/items', getItemsOptions);
+    fastify.get('/items/:id', getItemOptions);
 
     done();
 }
