@@ -8,6 +8,13 @@ fastify.get('/api/items', async (request, reply) => {
     reply.send(items);
 });
 
+fastify.get('/api/items/:id', async (request, reply) => {
+    const {id} = request.params;
+    const item = items.find(item => item.id === parseInt(id));
+
+    reply.send(item);
+});
+
 const start = async () => {
     try {
         await fastify.listen({
